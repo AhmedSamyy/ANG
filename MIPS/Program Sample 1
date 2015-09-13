@@ -1,0 +1,30 @@
+00000111
+addi $t1, $0, -3
+jal addition
+jal subtract
+addi $t2, $0, 196
+sw $t1, 0($t2)
+lw $t2, 0($t2)
+beq $t1, $t2, skip
+sll $t1, $t1, 2
+skip: srl $t1, $t1, 2
+slt $t3, $t2, $t1
+bne $t3, $0, skip2
+sub $t3, $t1, $t3
+skip2: add $t2, $t2, $t3
+nor $t3, $t3, $t2
+j finish
+srl $t3, $t3, 1
+finish: sll $t3, $t3, 1
+sub $t3, $t3, $t1
+slti $t1, $t3, 6
+
+addition:
+add $t1, $t1, $t1
+jr $ra
+
+
+
+subtract:
+addi $t1, $t1, 2
+jr $ra
