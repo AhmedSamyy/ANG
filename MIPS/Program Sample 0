@@ -1,0 +1,23 @@
+00000110
+addi $t1, $0, -8
+jal addition
+jal subtract
+beq $t1, $t2, skip
+skip: srl $t1, $t1, 2
+slt $t3, $t2, $t1
+bne $t3, $0, skip2
+skip2: add $t2, $t2, $t3
+j finish
+finish: sll $t3, $t3, 1
+
+
+
+addition:
+add $t1, $t1, $t1
+jr $ra
+
+
+
+subtract:
+addi $t1, $t1, 2
+jr $ra
